@@ -87,7 +87,7 @@ public class Vizitka {
     }
 
     public String getCelaAdresa() {
-        return ulice + ", " + obecPsc + " " + mesto;
+        return ulice + " " + obecPsc;
     }
 
 
