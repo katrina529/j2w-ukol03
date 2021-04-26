@@ -4,19 +4,30 @@ public class Vizitka {
     private String jmeno;
     private String firma;
     private String ulice;
+    private String mesto;
     private String obecPsc;
     private String email;
     private Integer telefon;
     private String web;
 
-    public Vizitka(String jmeno, String firma, String ulice, String obecPsc, String email, Integer telefon, String web) {
+    public Vizitka(String jmeno, String firma, String ulice, String mesto, String obecPsc, String email, Integer telefon, String web) {
         this.jmeno = jmeno;
         this.firma = firma;
         this.ulice = ulice;
+        this.mesto = mesto;
         this.obecPsc = obecPsc;
         this.email = email;
         this.telefon = telefon;
         this.web = web;
+
+    }
+
+    public String getMesto() {
+        return mesto;
+    }
+
+    public void setMesto(String mesto) {
+        this.mesto = mesto;
     }
 
     public String getJmeno() {
@@ -76,7 +87,7 @@ public class Vizitka {
     }
 
     public String getCelaAdresa() {
-        return ulice + ", " + obecPsc;
+        return ulice + ", " + obecPsc + " " + mesto;
     }
 
 
