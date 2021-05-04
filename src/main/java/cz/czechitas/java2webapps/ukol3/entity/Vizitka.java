@@ -1,5 +1,7 @@
 package cz.czechitas.java2webapps.ukol3.entity;
 
+import java.util.Objects;
+
 public class Vizitka {
     private String jmeno;
     private String firma;
@@ -35,7 +37,7 @@ public class Vizitka {
     }
 
     public void setJmeno(String jmeno) {
-        this.jmeno = jmeno;
+        this.jmeno = Objects.requireNonNull("jmeno");
     }
 
     public String getFirma() {
@@ -43,7 +45,7 @@ public class Vizitka {
     }
 
     public void setFirma(String firma) {
-        this.firma = firma;
+        this.firma = Objects.requireNonNull("firma");
     }
 
     public String getUlice() {
@@ -51,7 +53,7 @@ public class Vizitka {
     }
 
     public void setUlice(String ulice) {
-        this.ulice = ulice;
+        this.ulice = Objects.requireNonNull("ulice");
     }
 
     public String getObecPsc() {
@@ -59,7 +61,7 @@ public class Vizitka {
     }
 
     public void setObecPsc(String obecPsc) {
-        this.obecPsc = obecPsc;
+        this.obecPsc = Objects.requireNonNull("obecPsc");
     }
 
     public String getEmail() {
