@@ -29,30 +29,31 @@ public class VizitkaController {
     //zobrazení seznamu vizitek//
     @GetMapping("/")
     public ModelAndView seznam() {
-        ModelAndView modelAndView = new ModelAndView("seznam");
-        modelAndView.addObject("vizitky", seznamVizitek);
-        return modelAndView;
+        ModelAndView result = new ModelAndView("seznam");
+        result.addObject("vizitky", seznamVizitek);
+        return result;
     }
 
 
     //zobrzení detailu vizitky//
     @GetMapping(path = "/detail", params = {"id"})
     public ModelAndView detail(int id) {
-        ModelAndView modelAndView = new ModelAndView("detail");
-        modelAndView.addObject("vizitka", seznamVizitek.get(id));
-        return modelAndView;
+        ModelAndView result = new ModelAndView("detail");
+        result.addObject("id", id);
+        result.addObject("vizitka", seznamVizitek.get(id));
+        return result ;
     }
 
     //zadání nové vizitky//
     @GetMapping(path = "/nova")
     public ModelAndView nova() {
-        ModelAndView modelAndView = new ModelAndView("nova");
-        return modelAndView;
+        ModelAndView novaVizitka = new ModelAndView("nova");
+        return novaVizitka;
     }
 
     //poslání údajů na seznamVizitek//
-    @PostMapping(value = "/nova", params = {"jmeno", "firma", "ulice", "mesto", "obecPsc", "email", "phone", "web"})
-    public String append(Vizitka vizitka) {
+    @PostMapping(value = "/nova", params = {"jmeno", "firma", "ulice", "mesto", "obecPsc", "email", "telefon", "web"})
+    public String add(Vizitka vizitka) {
         seznamVizitek.add(vizitka);
         return "redirect: /";
     }
@@ -63,4 +64,5 @@ public class VizitkaController {
         seznamVizitek.remove(id);
         return "redirect:/";
     }
+
 }
