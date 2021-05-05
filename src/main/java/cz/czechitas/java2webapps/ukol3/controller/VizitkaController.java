@@ -55,7 +55,7 @@ public class VizitkaController {
     @PostMapping(value = "/nova", params = {"jmeno", "firma", "ulice", "mesto", "obecPsc", "email", "telefon", "web"})
     public String add(Vizitka vizitka) {
         seznamVizitek.add(vizitka);
-        return "redirect: /";
+        return "redirect:/";
     }
 
     //mazání vizitky//
