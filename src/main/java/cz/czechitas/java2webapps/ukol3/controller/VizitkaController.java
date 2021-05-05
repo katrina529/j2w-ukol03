@@ -3,11 +3,11 @@ package cz.czechitas.java2webapps.ukol3.controller;
 import cz.czechitas.java2webapps.ukol3.entity.Vizitka;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,24 +20,47 @@ public class VizitkaController {
 
     public VizitkaController() {
         seznamVizitek = new ArrayList<>();
-                seznamVizitek.add (new Vizitka("Petra Černocká", "Seznam", "Hovorčovická 11","Praha", "18200", null, 657655555,null ));
-                seznamVizitek.add (new Vizitka("Alice Bystrá", "Unicorn", "Lužany 30", "Přeštice","33454", "alice@bystra.cz", 676766766,null ));
-                seznamVizitek.add (new Vizitka("Jan Nedvěd", "Sparta Praha", "Smrková 30", "Plzeň","31200", "honzanedved@seznam.cz", null,null));
-                seznamVizitek.add (new Vizitka("Emil Novotný", "Kupi.cz", "Sady Pětatřicátníků 31", "Plzeň","30100",null ,null,"kupi.cz"));
+        seznamVizitek.add(new Vizitka("Petra Černocká", "Seznam", "Hovorčovická 11", "Praha", "18200", null, 657655555, null));
+        seznamVizitek.add(new Vizitka("Alice Bystrá", "Unicorn", "Lužany 30", "Přeštice", "33454", "alice@bystra.cz", 676766766, null));
+        seznamVizitek.add(new Vizitka("Jan Nedvěd", "Sparta Praha", "Smrková 30", "Plzeň", "31200", "honzanedved@seznam.cz", null, null));
+        seznamVizitek.add(new Vizitka("Emil Novotný", "Kupi.cz", "Sady Pětatřicátníků 31", "Plzeň", "30100", null, null, "kupi.cz"));
     }
 
+    //zobrazení seznamu vizitek//
     @GetMapping("/")
     public ModelAndView seznam() {
-//        LocalDate date = LocalDate.now();
-        ModelAndView modelAndView = new ModelAndView ("seznam");
+        ModelAndView modelAndView = new ModelAndView("seznam");
         modelAndView.addObject("vizitky", seznamVizitek);
         return modelAndView;
     }
 
-    @GetMapping(path = "/detail", params = "id")
+
+    //zobrzení detailu vizitky//
+    @GetMapping(path = "/detail", params = {"id"})
     public ModelAndView detail(int id) {
-        ModelAndView modelAndView = new ModelAndView ("detail");
+        ModelAndView modelAndView = new ModelAndView("detail");
         modelAndView.addObject("vizitka", seznamVizitek.get(id));
         return modelAndView;
+    }
+
+    //zadání nové vizitky//
+    @GetMapping(path = "/nova")
+    public ModelAndView nova() {
+        ModelAndView modelAndView = new ModelAndView("nova");
+        return modelAndView;
+    }
+
+    //poslání údajů na seznamVizitek//
+    @PostMapping(value = "/nova", params = {"jmeno", "firma", "ulice", "mesto", "obecPsc", "email", "phone", "web"})
+    public String append(Vizitka vizitka) {
+        seznamVizitek.add(vizitka);
+        return "redirect: /";
+    }
+
+    //mazání vizitky//
+    @PostMapping(path = "/detail", params = {"id"})
+    public String delete(int id) {
+        seznamVizitek.remove(id);
+        return "redirect:/";
     }
 }
